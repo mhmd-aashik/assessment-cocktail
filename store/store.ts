@@ -4,6 +4,6 @@ import cartReducer from "./cartSlice"; // Adjust the path as needed
 
 export const store = configureStore({
   reducer: {
-    cart: cartReducer, // `cart` should be the name under which you access state
+    cart: cartReducer, 
   },
 });

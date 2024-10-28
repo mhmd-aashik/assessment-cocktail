@@ -1,14 +1,22 @@
-// cartSlice.js
 import { createSlice } from "@reduxjs/toolkit";
+
+interface Favorite {
+  idDrink: string;
+}
+
+interface CartState {
+  favorites: Favorite[];
+}
+
+const initialState: CartState = {
+  favorites: [],
+};
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    favorites: [],
-  },
+  initialState,
   reducers: {
-    addFavorite: (state, action) => {
-      // Add favorite if it doesn't already exist in the favorites array
+    addFavorite: (state, action: { payload: Favorite }) => {
       const exists = state.favorites.find(
         (fav) => fav.idDrink === action.payload.idDrink
       );
@@ -16,8 +24,7 @@ const cartSlice = createSlice({
         state.favorites.push(action.payload);
       }
     },
-    removeFavorite: (state, action) => {
-      // Remove favorite if it exists
+    removeFavorite: (state, action: { payload: Favorite }) => {
       state.favorites = state.favorites.filter(
         (fav) => fav.idDrink !== action.payload.idDrink
       );

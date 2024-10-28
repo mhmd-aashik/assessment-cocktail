@@ -44,7 +44,7 @@ const CockTail = ({ cocktails }: Props) => {
   };
 
   const item = useSelector(
-    (state: { cart: { favorites: any[] } }) => state.cart.favorites
+    (state: { cart: { favorites: MapProps[] } }) => state.cart.favorites
   );
 
   useEffect(() => {
@@ -80,13 +80,14 @@ const CockTail = ({ cocktails }: Props) => {
                 <p className="text-sm text-gray-500">{cocktail.strCategory}</p>
               </div>
 
-              <button className="bg-blue-500 text-white rounded p-2 h-fit px-4 mt-3" 
+              <button
+                className="bg-blue-500 text-white rounded p-2 h-fit px-4 mt-3"
                 onClick={() => {
                   handleAdd(cocktail);
                   addedData();
                 }}
               >
-                {item.find((fav) => fav.idDrink === cocktail.idDrink)
+                {item.find((fav: { idDrink: string; }) => fav.idDrink === cocktail.idDrink)
                   ? "Remove"
                   : "Add"}
               </button>

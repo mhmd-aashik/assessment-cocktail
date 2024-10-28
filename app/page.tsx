@@ -1,6 +1,5 @@
 import React from "react";
 import { fetchRandomCocktails } from "../lib/api";
-import Search from "@/components/FavouriteComp";
 import CockTail from "@/components/CockTail";
 
 export const dynamic = "force-dynamic";

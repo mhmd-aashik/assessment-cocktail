@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import ReduxProvider from "@/providers/ReduxProvider";
 import Navbar from "@/components/Navbar";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = localFont({

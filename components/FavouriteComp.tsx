@@ -17,8 +17,15 @@ const FavouriteComp = () => {
     setIsClient(true);
   }, []);
 
+  interface Cocktail {
+    idDrink: string;
+    strDrinkThumb: string;
+    strDrink: string;
+    strCategory: string;
+  }
+
   const favorites = useSelector(
-    (state: { cart: { favorites: any[] } }) => state.cart.favorites
+    (state: { cart: { favorites: Cocktail[] } }) => state.cart.favorites
   );
 
   if (!isClient) return null;
@@ -34,35 +41,44 @@ const FavouriteComp = () => {
   return (
     <div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-        {currentFavorites.map((cocktail) => (
-          <div
-            key={cocktail.idDrink}
-            className="border rounded-lg p-4 text-center"
-          >
-            <Image
-              src={cocktail.strDrinkThumb}
-              alt={cocktail.strDrink}
-              width={300}
-              height={300}
-              className="w-full h-32 object-fit rounded bg-contain bg-top"
-            />
-            <div className="flex w-full justify-between">
-              <div>
-                <h2 className="font-semibold mt-2">{cocktail.strDrink}</h2>
-                <p className="text-sm text-gray-500">{cocktail.strCategory}</p>
+        {currentFavorites.map(
+          (cocktail: {
+            idDrink: string;
+            strDrinkThumb: string;
+            strDrink: string;
+            strCategory: string;
+          }) => (
+            <div
+              key={cocktail.idDrink}
+              className="border rounded-lg p-4 text-center"
+            >
+              <Image
+                src={cocktail.strDrinkThumb}
+                alt={cocktail.strDrink}
+                width={300}
+                height={300}
+                className="w-full h-32 object-fit rounded bg-contain bg-top"
+              />
+              <div className="flex w-full justify-between">
+                <div>
+                  <h2 className="font-semibold mt-2">{cocktail.strDrink}</h2>
+                  <p className="text-sm text-gray-500">
+                    {cocktail.strCategory}
+                  </p>
+                </div>
+                <button
+                  className="bg-blue-500 text-white rounded p-2 h-fit px-4 mt-3"
+                  onClick={() => {
+                    dispatch(removeFavorite(cocktail));
+                    deleted();
+                  }}
+                >
+                  Remove
+                </button>
               </div>
-              <button
-                className="bg-blue-500 text-white rounded p-2 h-fit px-4 mt-3"
-                onClick={() => {
-                  dispatch(removeFavorite(cocktail));
-                  deleted();
-                }}
-              >
-                Remove
-              </button>
             </div>
-          </div>
-        ))}
+          )
+        )}
       </div>
 
       {currentFavorites.length === 0 ? (
